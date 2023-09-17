@@ -1,7 +1,9 @@
 package presenter;
 
 import model.NoticiasModel;
+import model.UsuarioModel;
 import pojos.Noticia;
+import pojos.Usuario;
 import view.View;
 
 import java.util.Scanner;
@@ -10,6 +12,7 @@ public class Presenter {
     private NoticiasModel noticiasModel;
     private View view;
     private Scanner input;
+    private UsuarioModel usuarioModel;
 
     Presenter(){
         init();
@@ -17,16 +20,34 @@ public class Presenter {
 
     public void init(){
         noticiasModel = new NoticiasModel();
+        usuarioModel = new UsuarioModel();
         view = new View();
         input = new Scanner(System.in);
-        //view.Menu();
+        QuemarUsuarios();
+        view.showMessage(usuarioModel.ShowUsuarios());
         for (int i = 0; i < 10; i++) {
             QuemarNoticias(i);
         }
-        options();
+        InicioSesion();
+        MenuNoticias();
     }
 
-    public void options(){
+    public void InicioSesion(){
+        int i = 1;
+        do{
+            view.showMessage("Ingrese email");
+            String email = input.nextLine();
+            view.showMessage("Ingrese contraseña");
+            String password = input.nextLine();
+            Usuario ini = new Usuario(email, password);
+            i = usuarioModel.InicioSesion(ini);
+            if(i == -1){
+                view.showMessage("Usuario o contraseña incorrecta");
+            }
+        }while ( i == -1);
+    }
+
+    public void MenuNoticias(){
         int i = 1;
         do {
             view.Menu();
@@ -81,6 +102,12 @@ public class Presenter {
         String titulo = "titulo";
         String descripcion = "descripcion";
         noticiasModel.AddNoticia(new Noticia(id,titulo,descripcion));
+    }
+
+    public void QuemarUsuarios(){
+        String email = "deam10";
+        String password = "1234";
+        usuarioModel.AddUsuario(new Usuario(email, password));
     }
 
 
