@@ -19,6 +19,13 @@ public class View {
         System.out.println("2 - iniciar sesion");
     }
 
+    public void description(){
+        System.out.println("0 - salir");
+        System.out.println("1 - ver sedes");
+        System.out.println("2 - ver cargos");
+        System.out.println("3 - menu noticias");
+    }
+
     public void showMessage(String message){
         System.out.println(message);
     }

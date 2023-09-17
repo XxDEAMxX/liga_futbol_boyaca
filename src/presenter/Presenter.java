@@ -1,5 +1,6 @@
 package presenter;
 
+import model.LigaModel;
 import model.NoticiasModel;
 import model.UsuarioModel;
 import pojos.Noticia;
@@ -13,6 +14,7 @@ public class Presenter {
     private View view;
     private Scanner input;
     private UsuarioModel usuarioModel;
+    private LigaModel ligaModel;
 
     Presenter(){
         init();
@@ -21,15 +23,15 @@ public class Presenter {
     public void init(){
         noticiasModel = new NoticiasModel();
         usuarioModel = new UsuarioModel();
+        ligaModel = new LigaModel();
         view = new View();
         input = new Scanner(System.in);
         QuemarUsuarios();
-        view.showMessage(usuarioModel.ShowUsuarios());
         for (int i = 0; i < 10; i++) {
             QuemarNoticias(i);
         }
         Login();
-        MenuNoticias();
+        MenuGeneral();
     }
 
     public boolean InicioSesion(){
@@ -73,6 +75,33 @@ public class Presenter {
                     break;
                 default:
                     view.showMessage("Elige una opcion existete");
+                    break;
+            }
+        }while (i != 0);
+    }
+
+    public void MenuGeneral(){
+        view.showMessage(ligaModel.getDescripcion());
+        int i = 1;
+        do{
+            view.description();
+            int index = input.nextInt();
+            input.nextLine();
+            switch (index) {
+                case 1:
+                    view.showMessage(ligaModel.toStringSedes());
+                    break;
+                case 2:
+                    view.showMessage(ligaModel.toStringCargos());
+                    break;
+                case 3:
+                    MenuNoticias();
+                    break;
+                case 4:
+                    System.out.println("menu partisdos");
+                    break;
+                default:
+                    view.showMessage("elige una opcion valida");
                     break;
             }
         }while (i != 0);
