@@ -28,12 +28,13 @@ public class Presenter {
         for (int i = 0; i < 10; i++) {
             QuemarNoticias(i);
         }
-        InicioSesion();
+        Login();
         MenuNoticias();
     }
 
-    public void InicioSesion(){
-        int i = 1;
+    public boolean InicioSesion(){
+        int i = 0;
+        boolean isLogin = true;
         do{
             view.showMessage("Ingrese email");
             String email = input.nextLine();
@@ -43,8 +44,38 @@ public class Presenter {
             i = usuarioModel.InicioSesion(ini);
             if(i == -1){
                 view.showMessage("Usuario o contraseña incorrecta");
+                view.showMessage("desea volver a intentarlo (S/n)");
+                String res = input.nextLine().toUpperCase();
+                if(res.equalsIgnoreCase("N")) {
+                    i = 0;
+                    isLogin = false;
+                }
             }
         }while ( i == -1);
+        return isLogin;
+    }
+
+    public void Login(){
+        int i = 1;
+        do {
+            view.Login();
+            int index = input.nextInt();
+            input.nextLine();
+            switch (index) {
+                case 1:
+                    AddUser();
+                    i = index;
+                    break;
+                case 2:
+                    if(InicioSesion()){
+                        i = 0;
+                    }
+                    break;
+                default:
+                    view.showMessage("Elige una opcion existete");
+                    break;
+            }
+        }while (i != 0);
     }
 
     public void MenuNoticias(){
@@ -66,6 +97,9 @@ public class Presenter {
                 case 4:
                     view.showMessage(noticiasModel.showNoticias());
                     break;
+                default:
+                    view.showMessage("Elige una opcion existete");
+                    break;
             }
             i = index;
         }while (i != 0);
@@ -78,6 +112,14 @@ public class Presenter {
         view.showMessage("Ingresa la descripcion de la noticia");
         String descripcion = input.nextLine();
         noticiasModel.AddNoticia(new Noticia(id,titulo,descripcion));
+    }
+
+    public void AddUser(){
+        view.showMessage("ingresa email");
+        String email = input.nextLine();
+        view.showMessage("ingresa contraseña");
+        String password = input.nextLine();
+        usuarioModel.AddUsuario(new Usuario(email, password));
     }
 
     public void RemoveNoticia(){

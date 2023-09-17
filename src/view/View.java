@@ -13,6 +13,12 @@ public class View {
         System.out.println("4 - ver noticias");
     }
 
+    public void Login(){
+        System.out.println("0 - salir");
+        System.out.println("1 - crear cuenta");
+        System.out.println("2 - iniciar sesion");
+    }
+
     public void showMessage(String message){
         System.out.println(message);
     }
