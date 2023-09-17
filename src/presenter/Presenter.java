@@ -64,6 +64,9 @@ public class Presenter {
             int index = input.nextInt();
             input.nextLine();
             switch (index) {
+                case 0:
+                    i = 0;
+                    break;
                 case 1:
                     AddUser();
                     i = index;
@@ -84,10 +87,13 @@ public class Presenter {
         view.showMessage(ligaModel.getDescripcion());
         int i = 1;
         do{
-            view.description();
+            view.MenuGeneral();
             int index = input.nextInt();
             input.nextLine();
             switch (index) {
+                case 0:
+                    i = 0;
+                    break;
                 case 1:
                     view.showMessage(ligaModel.toStringSedes());
                     break;
@@ -100,6 +106,12 @@ public class Presenter {
                 case 4:
                     System.out.println("menu partisdos");
                     break;
+                case 5:
+                    view.equipos();
+                    break;
+                case 6:
+                    view.Imagenes();
+                    break;
                 default:
                     view.showMessage("elige una opcion valida");
                     break;
@@ -110,10 +122,13 @@ public class Presenter {
     public void MenuNoticias(){
         int i = 1;
         do {
-            view.Menu();
+            view.MenuNoticias();
             int index = input.nextInt();
             input.nextLine();
             switch (index) {
+                case 0:
+                    i = 0;
+                    break;
                 case 1:
                     AddNoticia();
                     break;
