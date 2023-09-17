@@ -27,6 +27,7 @@ public class View {
         System.out.println("millonarios - escuela 3 - aliniacion 2-4-4");
         System.out.println("Juventus - escuela 4 - aliniacion 2-4-4");
         System.out.println("Atletico Nacional - escuela 5 - aliniacion 2-4-4");
+        System.out.println("la vecindad del chavo - escuela 6 - aliniacion 2-4-4");
     }
 
     public void Login(){
@@ -40,8 +41,10 @@ public class View {
         System.out.println("1 - ver sedes");
         System.out.println("2 - ver cargos");
         System.out.println("3 - menu noticias");
-        System.out.println("5 - ver equipos");
-        System.out.println("6 - ver fotos representativas ");
+        System.out.println("4 - ver equipos");
+        System.out.println("5 - ver marcadores");
+        System.out.println("6 - edicar marcador");
+        System.out.println("7 - ver fotos representativas ");
     }
 
     public void showMessage(String message){

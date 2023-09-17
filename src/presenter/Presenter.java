@@ -2,8 +2,10 @@ package presenter;
 
 import model.LigaModel;
 import model.NoticiasModel;
+import model.PartidosModel;
 import model.UsuarioModel;
 import pojos.Noticia;
+import pojos.Partidos;
 import pojos.Usuario;
 import view.View;
 
@@ -15,6 +17,7 @@ public class Presenter {
     private Scanner input;
     private UsuarioModel usuarioModel;
     private LigaModel ligaModel;
+    private PartidosModel partidosModel;
 
     Presenter(){
         init();
@@ -24,6 +27,7 @@ public class Presenter {
         noticiasModel = new NoticiasModel();
         usuarioModel = new UsuarioModel();
         ligaModel = new LigaModel();
+        partidosModel = new PartidosModel();
         view = new View();
         input = new Scanner(System.in);
         QuemarUsuarios();
@@ -104,12 +108,15 @@ public class Presenter {
                     MenuNoticias();
                     break;
                 case 4:
-                    System.out.println("menu partisdos");
-                    break;
-                case 5:
                     view.equipos();
                     break;
+                case 5:
+                    view.showMessage(partidosModel.toStringPartidos());
+                    break;
                 case 6:
+                    modificarMarcadorPartidos();
+                    break;
+                case 7:
                     view.Imagenes();
                     break;
                 default:
@@ -117,6 +124,15 @@ public class Presenter {
                     break;
             }
         }while (i != 0);
+    }
+
+    public void modificarMarcadorPartidos(){
+        view.showMessage("ingrese el id del partido que deseas modificar");
+        int id = input.nextInt();
+        input.nextLine();
+        view.showMessage("Ingresa el nuevo marcador");
+        String marcador = input.nextLine();
+        partidosModel.modificarPartido(id, marcador);
     }
 
     public void MenuNoticias(){
